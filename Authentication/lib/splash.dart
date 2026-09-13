@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'home.dart';
 import 'login.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,12 +19,22 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _navigateAfterDelay() async {
-    await Future.delayed(Duration(milliseconds: 2500));
+    await Future.delayed(const Duration(milliseconds: 2500));
 
     if(!mounted) return;
 
+    final box = Hive.box('userBox');
+    final bool isLoggedIn = box.get('isLoggedIn', defaultValue: false);
+    final String? email = box.get('email');
+    final String? password = box.get('password');
+
+    print('Email : $email');
+    print('Password : $password');
+
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => const MyLoginScreen())
+      MaterialPageRoute(
+          builder: (_) => isLoggedIn ? const MyHomeScreen() : const MyLoginScreen(),
+      )
     );
   }
 
