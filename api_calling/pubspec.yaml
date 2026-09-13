@@ -1,5 +1,5 @@
-name: auth
-description: "Authentication system"
+name: api_calling
+description: "API calling system using Flutter Bloc for state management and the http package for making HTTP requests. This package provides a structured approach to handle API calls, manage states, and handle responses in Flutter applications."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
